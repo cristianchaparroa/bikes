@@ -1,3 +1,3 @@
 mod bike_service;
 
-pub use bike_service::BikeCreator;
+pub use bike_service::*;

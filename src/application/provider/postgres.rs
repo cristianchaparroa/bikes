@@ -71,16 +71,13 @@ pub fn init() {
     lazy_static::initialize(&POOL);
 }
 
-
 pub struct Postgres {
-    pub conn : DbConnection
+    pub conn: DbConnection,
 }
 
 impl Postgres {
     pub fn new() -> Self {
-        let conn =  get_connection().unwrap();
-        Postgres{
-            conn
-        }
-    }   
+        let conn = get_connection().unwrap();
+        Postgres { conn }
+    }
 }

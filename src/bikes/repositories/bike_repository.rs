@@ -3,5 +3,5 @@ use crate::bikes::Bike;
 // to Bikes
 pub trait BikeWriter {
     // It persists for first time a bike
-    fn create(&self, bike: Bike);
+    fn create(&self, bike: Bike) -> Bike;
 }
