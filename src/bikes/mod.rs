@@ -1,9 +1,6 @@
-mod repositories;
-mod services;
+pub mod repositories;
+pub mod schema;
+pub mod services;
+
 mod bike;
-
-
-// It exposes the domain object Bike.
 pub use bike::Bike;
-pub use repositories::BikeWriter;
-pub use services::BikeCreator;
