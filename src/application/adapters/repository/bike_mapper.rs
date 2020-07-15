@@ -1,4 +1,4 @@
-use super::super::models::BikeModel;
+use crate::application::adapters::repository::bike_model::BikeModel;
 use crate::bikes::Bike;
 
 pub struct BikeMapper;

@@ -1,14 +1,13 @@
 use diesel::prelude::*;
 use uuid::Uuid;
 
-use super::super::mappers::BikeMapper;
-use crate::application::adapters::models::BikeModel;
+use super::bike_mapper::BikeMapper;
+use super::bike_model::BikeModel;
 use crate::application::provider::{get_connection, SQLError};
-use crate::bikes::repositories::BikeWriter;
+use crate::bikes::ports::BikeWriter;
 use crate::bikes::schema::bikes;
 use crate::bikes::Bike;
 
-// It is the bike representation.
 pub struct BikeWriterStorage;
 
 impl BikeWriterStorage {

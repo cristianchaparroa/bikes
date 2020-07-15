@@ -1,6 +1,6 @@
-pub mod repositories;
+pub mod managers;
+pub mod ports;
 pub mod schema;
-pub mod services;
 
 mod bike;
 pub use bike::Bike;
