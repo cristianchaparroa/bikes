@@ -5,7 +5,6 @@ use crate::bikes::ports::{BikeReader, BikeWriter};
 use crate::bikes::Bike;
 
 pub struct BikeService {
-    // https://stackoverflow.com/questions/26212397/references-to-traits-in-structs
     writer: Box<dyn BikeWriter + Sync>,
     reader: Box<dyn BikeReader + Sync>,
 }

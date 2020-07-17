@@ -10,5 +10,5 @@ mod bikes;
 use application::rest;
 
 fn main() {
-    rest::run();
+    let _ = rest::run();
 }
