@@ -6,12 +6,12 @@ use crate::bikes::Bike;
 
 pub struct BikeService {
     // https://stackoverflow.com/questions/26212397/references-to-traits-in-structs
-    writer: Box<dyn BikeWriter>,
-    reader: Box<dyn BikeReader>,
+    writer: Box<dyn BikeWriter + Sync>,
+    reader: Box<dyn BikeReader + Sync>,
 }
 
 impl BikeService {
-    pub fn new(w: Box<dyn BikeWriter>, r: Box<dyn BikeReader>) -> Self {
+    pub fn new(w: Box<dyn BikeWriter + Sync>, r: Box<dyn BikeReader + Sync>) -> Self {
         BikeService {
             writer: w,
             reader: r,

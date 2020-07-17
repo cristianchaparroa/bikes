@@ -24,17 +24,6 @@ pub fn get_connection() -> Result<DbConnection, SQLError> {
         .map_err(|e| SQLError::new(format!("Failed getting db connection: {}", e)))
 }
 
-pub fn init() {
+pub fn new_pooled_connection() {
     lazy_static::initialize(&POOL);
-}
-
-pub struct Postgres {
-    pub conn: DbConnection,
-}
-
-impl Postgres {
-    pub fn new() -> Self {
-        let conn = get_connection().unwrap();
-        Postgres { conn }
-    }
 }

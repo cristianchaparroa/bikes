@@ -9,6 +9,9 @@ edition = "2018"
 [dependencies]
 actix-web = "2.0"
 actix-rt = "1.0"
+actix-service = "1.0.5"
+
+
 
 ## auto-reloading
 listenfd = "0.3"
