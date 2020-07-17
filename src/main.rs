@@ -1,11 +1,14 @@
-mod application;
-use application::SQLConnect;
+#[macro_use]
+extern crate diesel;
 
-struct App {
-    pool: application::Pool
-}
+#[macro_use]
+extern crate log;
+
+mod application;
+mod bikes;
+
+use application::rest;
 
 fn main() {
-    let postgres =  application::Postgres::new();
-    let app = App {pool: postgres.get_connection()};
-}   
+    let _ = rest::run();
+}

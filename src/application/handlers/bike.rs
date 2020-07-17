@@ -3,7 +3,13 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Serialize, Deserialize)]
-pub struct Bike {
+pub struct BikeRequest {
+    pub description: String,
+    pub model: String,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct BikeResponse {
     pub id: Uuid,
     pub description: String,
     pub model: String,

@@ -1,43 +1,29 @@
 use diesel::pg::PgConnection;
 use diesel::r2d2::ConnectionManager;
-use super::{SQLConnect, Pool};
+use lazy_static::lazy_static;
+use r2d2;
+use std::env;
 
-pub struct  Postgres {
+use super::SQLError;
 
-    pool :  Box<Pool>
+type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
+pub type DbConnection = r2d2::PooledConnection<ConnectionManager<PgConnection>>;
+
+//embed_migrations!();
+
+lazy_static! {
+    static ref POOL: Pool = {
+        let db_url = env::var("DATABASE_URL").expect("Database url not set");
+        let manager = ConnectionManager::<PgConnection>::new(db_url);
+        Pool::new(manager).expect("Failed to create db pool")
+    };
 }
 
-// It generates the URL connection using the environmental
-// variables.
-pub fn get_url() -> String {
-    let user = "";
-    let password = "";
-    let host = "";
-    let port = "";
-    let database = "";
-
-    format!("postgres://{}:{}@{}:{}/{}", user, password, host, port,database)
+pub fn get_connection() -> Result<DbConnection, SQLError> {
+    POOL.get()
+        .map_err(|e| SQLError::new(format!("Failed getting db connection: {}", e)))
 }
 
-impl<'a> Postgres {
-
-    pub fn new() -> Self {
-
-        let url = get_url();
-    
-        let manager = ConnectionManager::<PgConnection>::new(url);
-        let result = Pool::new(manager);
-        let pool = result.unwrap();
-    
-        let b = Box::new(pool);
-        Postgres{pool:b}
-    }
-}
-
-
-impl SQLConnect for Postgres {
-
-    fn get_connection(&self) -> Pool {
-        *self.pool
-    }
+pub fn new_pooled_connection() {
+    lazy_static::initialize(&POOL);
 }

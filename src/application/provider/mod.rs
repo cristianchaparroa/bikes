@@ -1,5 +1,5 @@
+mod error;
 mod postgres;
-mod pool;
 
-pub use pool::*;
+pub use error::*;
 pub use postgres::*;
