@@ -1,6 +1,10 @@
 # DI
 
-The following repository contains an small Rest API example with Rust language. It creates a CRUD for bikes.
+The following repository contains an small Rest API example with Rust language. It creates a CRUD for bikes
+The next image is a simple architecture diagram.
+
+![](./images/architecture.png)
+
 
 ### Dependencies
 
@@ -23,7 +27,7 @@ docker-compose up
 
 2. Diesel configuration:
 ```
-export DATABASE_URL=postgres://bikes:bikes@localhost/bikes
+export DATABASE_URL=postgres://di:di@localhost/di
 ```
 
 ```
@@ -56,11 +60,8 @@ curl --request POST \
   --url http://localhost:4000/bikes \
   --header 'content-type: application/json' \
   --data '{
-	"id": "1fdf0da9-1bfe-410e-b6ac-5a27b3cd1dc8",
 	"model": "MBT",
-	"description": "This is a montain bike",
-	 "created_at": "2020-07-07T02:06:24.028203",
-  "updated_at": "2020-07-07T02:06:24.028220"
+	"description": "This is a montain bike"
 }
 '
 ```
