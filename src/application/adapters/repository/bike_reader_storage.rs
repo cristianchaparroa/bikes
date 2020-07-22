@@ -3,7 +3,6 @@ use uuid::Uuid;
 
 use crate::bikes::schema::bikes;
 
-use super::bike_mapper::BikeMapper;
 use super::bike_model::BikeModel;
 use crate::application::provider::{get_connection, SQLError};
 use crate::bikes::ports::BikeReader;
@@ -32,15 +31,12 @@ impl BikeReaderStorage {
 impl BikeReader for BikeReaderStorage {
     fn find_all(&self) -> Vec<Bike> {
         let bycicles = BikeReaderStorage::get_all().unwrap();
-        let bycicles = bycicles
-            .into_iter()
-            .map(|b| BikeMapper::to_domain(b))
-            .collect();
+        let bycicles = bycicles.into_iter().map(|b| b.to_domain()).collect();
         bycicles
     }
 
     fn find_by_id(&self, id: Uuid) -> Bike {
         let bike = BikeReaderStorage::get_by_id(id).unwrap();
-        BikeMapper::to_domain(bike)
+        bike.to_domain()
     }
 }

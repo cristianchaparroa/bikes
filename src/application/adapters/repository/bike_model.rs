@@ -1,4 +1,5 @@
 use crate::bikes::schema::bikes;
+use crate::bikes::Bike;
 use chrono::{NaiveDateTime, Utc};
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
@@ -23,6 +24,26 @@ impl BikeModel {
             model: model.into(),
             created_at: Utc::now().naive_utc(),
             updated_at: Utc::now().naive_utc(),
+        }
+    }
+
+    pub fn from(bike: Bike) -> BikeModel {
+        BikeModel {
+            id: bike.id,
+            description: bike.description.clone(),
+            model: bike.model.clone(),
+            created_at: bike.created_at,
+            updated_at: bike.updated_at,
+        }
+    }
+
+    pub fn to_domain(&self) -> Bike {
+        Bike {
+            id: self.id,
+            description: self.description.clone(),
+            model: self.model.clone(),
+            created_at: self.created_at,
+            updated_at: self.updated_at,
         }
     }
 }

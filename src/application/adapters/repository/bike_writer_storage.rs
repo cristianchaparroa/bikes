@@ -1,7 +1,6 @@
 use diesel::prelude::*;
 use uuid::Uuid;
 
-use super::bike_mapper::BikeMapper;
 use super::bike_model::BikeModel;
 use crate::application::provider::{get_connection, SQLError};
 use crate::bikes::ports::BikeWriter;
@@ -43,8 +42,8 @@ impl BikeWriterStorage {
 
 impl BikeWriter for BikeWriterStorage {
     fn create(&self, bike: Bike) -> Bike {
-        let bike_model = BikeMapper::to_model(bike);
+        let bike_model = BikeModel::from(bike);
         let bicycle = BikeWriterStorage::create(bike_model).unwrap();
-        BikeMapper::to_domain(bicycle)
+        bicycle.to_domain()
     }
 }
