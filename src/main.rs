@@ -10,6 +10,6 @@ mod bikes;
 use application::rest;
 
 fn main() {
-    // let _ = rest::run();
-    let _ = rest::State::new();
+    let _ = rest::run();
+    // let _ = rest::State::new();
 }

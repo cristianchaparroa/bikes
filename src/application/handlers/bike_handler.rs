@@ -1,5 +1,4 @@
 use std::rc::Rc;
-use std::sync::Arc;
 use uuid::Uuid;
 
 use crate::application::handlers::Error;
@@ -8,11 +7,11 @@ use crate::bikes::ports::BikeManager;
 use actix_web::HttpResponse;
 #[derive(Clone)]
 pub struct BikeHandler {
-    service: Arc<dyn BikeManager>,
+    service: Rc<dyn BikeManager>,
 }
 
 impl BikeHandler {
-    pub fn new(service: Arc<dyn BikeManager>) -> Self {
+    pub fn new(service: Rc<dyn BikeManager>) -> Self {
         BikeHandler { service }
     }
 

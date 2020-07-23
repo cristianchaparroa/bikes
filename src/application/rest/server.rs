@@ -6,21 +6,17 @@ use std::env;
 use super::state::State;
 use crate::application::handlers;
 
-/*
 #[actix_rt::main]
 pub async fn run() -> std::io::Result<()> {
-
     dotenv().ok();
-
-    let state = State::new();
 
     let mut listenfd = ListenFd::from_env();
 
     let mut server = HttpServer::new(move || {
-        App::new()
-            .data(state)
-            .configure(handlers::setup_routes)
-    } );
+        let state = State::new();
+
+        App::new().data(state).configure(handlers::setup_routes)
+    });
 
     server = match listenfd.take_tcp_listener(0)? {
         Some(listener) => server.listen(listener)?,
@@ -34,4 +30,3 @@ pub async fn run() -> std::io::Result<()> {
     info!("Starting server");
     server.run().await
 }
-*/
