@@ -1,16 +1,17 @@
+use std::rc::Rc;
 use uuid::Uuid;
 
 use crate::bikes::ports::BikeManager;
 use crate::bikes::ports::{BikeReader, BikeWriter};
 use crate::bikes::Bike;
-
+#[derive(Clone)]
 pub struct BikeService {
-    writer: Box<dyn BikeWriter + Sync>,
-    reader: Box<dyn BikeReader + Sync>,
+    writer: Rc<dyn BikeWriter>,
+    reader: Rc<dyn BikeReader>,
 }
 
 impl BikeService {
-    pub fn new(w: Box<dyn BikeWriter + Sync>, r: Box<dyn BikeReader + Sync>) -> Self {
+    pub fn new(w: Rc<dyn BikeWriter>, r: Rc<dyn BikeReader>) -> Self {
         BikeService {
             writer: w,
             reader: r,

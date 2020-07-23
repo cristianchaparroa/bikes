@@ -5,6 +5,10 @@ use uuid::Uuid;
 pub trait BikeWriter {
     // It persists for first time a bike
     fn create(&self, bike: Bike) -> Bike;
+
+    fn update(&self, id: Uuid, bicycle: Bike) -> Bike;
+
+    fn delete(&self, id: Uuid) -> usize;
 }
 
 pub trait BikeReader {
